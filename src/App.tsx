@@ -3,8 +3,12 @@ import FunnelProvider from "./acquisition-funnel/FunnelProvider";
 import StateRenderer from "./acquisition-funnel/StateRenderer";
 import ActivityStep from "./acquisition-funnel/steps/ActivityStep";
 import AttendeeStep from "./acquisition-funnel/steps/AttendeeStep";
+import AdditionnalInformationStep from "./acquisition-funnel/steps/AdditionalInfomationStep";
 import { stateMachine } from "./acquisition-funnel/state-machine";
-import { SELECT_ACTIVITY } from "./acquisition-funnel/types";
+import {
+  SELECT_ACTIVITY,
+  SUBMIT_ADDITIONNAL_INFORMATION,
+} from "./acquisition-funnel/types";
 import "./App.css";
 
 function App() {
@@ -37,16 +41,16 @@ function App() {
           )}
         </StateRenderer>
         <StateRenderer state="additional_information">
-          {(send) => {
-            return (
-              <div>
-                <h2>Additional information</h2>
-                <button onClick={() => send("SUBMIT_ADDITIONNAL_INFORMATION")}>
-                  next
-                </button>
-              </div>
-            );
-          }}
+          {(send) => (
+            <AdditionnalInformationStep
+              onSubmit={(info) =>
+                send({
+                  type: SUBMIT_ADDITIONNAL_INFORMATION,
+                  data: info,
+                })
+              }
+            />
+          )}
         </StateRenderer>
         <StateRenderer state="payment">
           {() => {
