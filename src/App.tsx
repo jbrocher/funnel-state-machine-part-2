@@ -14,17 +14,17 @@ function App() {
             return (
               <div>
                 <h2>Activity Step</h2>
-                <button onClick={() => send("NEXT")}>next</button>
+                <button onClick={() => send("SELECT_ACTIVITY")}>next</button>
               </div>
             );
           }}
         </StateRenderer>
-        <StateRenderer state="register_participant">
+        <StateRenderer state="register_attendee">
           {(send) => (
             <RegistrationStep
-              add_participant={() => send("ADD_PARTICIPANT")}
+              add_participant={() => send("ADD_ATTENDEE")}
               additional_information={() => send("ADD_INFO")}
-              proceed_to_payment={() => send("NEXT")}
+              proceed_to_payment={() => send("SUBMIT_ATTENDEE")}
             />
           )}
         </StateRenderer>
@@ -33,7 +33,9 @@ function App() {
             return (
               <div>
                 <h2>Additional information</h2>
-                <button onClick={() => send("NEXT")}>next</button>
+                <button onClick={() => send("SUBMIT_ADDITIONNAL_INFORMATION")}>
+                  next
+                </button>
               </div>
             );
           }}
