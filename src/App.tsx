@@ -1,8 +1,8 @@
 import React from "react";
 import FunnelProvider from "./acquisition-funnel/FunnelProvider";
 import StateRenderer from "./acquisition-funnel/StateRenderer";
-import RegistrationStep from "./acquisition-funnel/RegistrationStep";
 import ActivityStep from "./acquisition-funnel/steps/ActivityStep";
+import AttendeeStep from "./acquisition-funnel/steps/AttendeeStep";
 import { stateMachine } from "./acquisition-funnel/state-machine";
 import { SELECT_ACTIVITY } from "./acquisition-funnel/types";
 import "./App.css";
@@ -25,10 +25,14 @@ function App() {
         </StateRenderer>
         <StateRenderer state="register_attendee">
           {(send) => (
-            <RegistrationStep
-              add_participant={() => send("ADD_ATTENDEE")}
-              additional_information={() => send("ADD_INFO")}
-              proceed_to_payment={() => send("SUBMIT_ATTENDEE")}
+            <AttendeeStep
+              addAttendee={(attendee) =>
+                send({ type: "ADD_ATTENDEE", data: attendee })
+              }
+              addInfo={(attendee) => send({ type: "ADD_INFO", data: attendee })}
+              proceedToPayment={(attendee) =>
+                send({ type: "SUBMIT_ATTENDEE", data: attendee })
+              }
             />
           )}
         </StateRenderer>

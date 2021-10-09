@@ -1,27 +1,14 @@
 import { Machine, assign } from "xstate";
-
-type ESCAPE_GAME = "escape-game";
-type BOWLING = "bowling";
-
-interface Attendee {
-  name: string;
-  surname: string;
-}
-
-type Activity = ESCAPE_GAME | BOWLING;
-
-interface FunnelData {
-  activity?: ESCAPE_GAME | BOWLING;
-  attendees: Attendee[];
-  additional_information?: string;
-  payment?: number;
-}
-
-const SELECT_ACTIVITY = "SELECT_ACTIVITY";
-const SUBMIT_ATTENDEE = "SUBMIT_ATTENDEE";
-const ADD_ATTENDEE = "ADD_ATTENDEE";
-const ADD_INFO = "ADD_INFO";
-const SUBMIT_ADDITIONNAL_INFORMATION = "SUBMIT_ADDITIONNAL_INFORMATION";
+import {
+  Attendee,
+  Activity,
+  FunnelData,
+  SELECT_ACTIVITY,
+  SUBMIT_ATTENDEE,
+  ADD_ATTENDEE,
+  ADD_INFO,
+  SUBMIT_ADDITIONNAL_INFORMATION,
+} from "./types";
 
 type AttendeeEvent = {
   type: typeof SUBMIT_ATTENDEE | typeof ADD_ATTENDEE | typeof ADD_INFO;
